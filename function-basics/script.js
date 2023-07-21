@@ -5,7 +5,7 @@ Implement a welcomeMsg function.
 
 The first parameter is the name of the person to be greeted. It's a string.
 The function should return a string that contains the name of person in a welcome msg.
-TODO: implement welcomeMsg function
+// TODO: implement welcomeMsg function
 
 console.log(welcomeMsg("Jane"));
 Welcome Jane!

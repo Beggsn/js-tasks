@@ -45,8 +45,17 @@ If the number is an even number, the function returns the string even
 If the number is an odd number, the function returns the string odd
 
 */
+// let oddEven = function (number) {
+//   if (number % 2 === 0) {
+//     return "even";
+//   } else {
+//     return "odd";
+//   }
+// };
+
 let oddEven = function (number) {
-  if (number % 2 === 0) {
+  const isEvenNumber = number % 2 === 0;
+  if (isEvenNumber) {
     return "even";
   } else {
     return "odd";

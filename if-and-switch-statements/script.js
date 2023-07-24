@@ -34,6 +34,7 @@ if (size > 20) {
 }
 
 console.log(result);
+console.log("================");
 
 /*
 02) oddEven function
@@ -56,6 +57,7 @@ console.log(oddEven(4));
 console.log(oddEven(3));
 console.log(oddEven(-1));
 console.log(oddEven(10));
+console.log("================");
 
 /*
 03) oldYoung function
@@ -84,3 +86,4 @@ console.log(oldYoung(27));
 console.log(oldYoung(6));
 console.log(oldYoung(-1));
 console.log(oldYoung(86));
+console.log("================");

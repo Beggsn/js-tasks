@@ -29,6 +29,7 @@ function getUserNameLength(userName) {
 
 console.log(getUserNameLength(userName) > 4)
 // ^______________ Should log true
+console.log("================");
 
 
 /*
@@ -68,3 +69,4 @@ console.log(isString(3));
 console.log(isString(undefined));
 console.log(isString(""));
 console.log(isString("John" + "Doe"));
+console.log("================");

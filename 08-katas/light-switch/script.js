@@ -1,9 +1,3 @@
-// function logEvent(event) {
-//     console.log(event.target);
-//     console.log(event.currentTarget);
-//     console.log(event.eventPhase);
-// }
-
 let dark = false;
 const btn = document.querySelector('.button');
 btn.addEventListener('click', function() {

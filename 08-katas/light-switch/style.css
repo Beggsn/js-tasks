@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.button {
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    font-family: 'Azeret Mono', monospace;
+    font-weight: 700;
+    background-color: #fff;
+    color: #000;
+    transition: background-color 0.3s ease-in-out, color 1s ease-in-out;
+}
+
+.black {
+    background-color: #000;
+    color: #fff;
+}
+
+.white {
+    background-color: #fff;
+    color: #000;
+}
+
+.button-black {
+    border-color: yellow;
+    box-shadow: 0 0 10px 5px yellow;
+    background-color: #000;
+    color: #fff;
+}

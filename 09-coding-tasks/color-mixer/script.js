@@ -24,6 +24,12 @@ function updateColor() {
 updateColor();
 
 function decimalToHex(value) {
+  return value.toString(16);
+}
+
+/*
+function decimalToHex(value) {
   let hexStr = Number(value).toString(16);
   return hexStr;
 }
+*/ 

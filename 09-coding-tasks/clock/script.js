@@ -14,7 +14,7 @@ function updateDigitalClock() {
   digitalClockMinutes.textContent = minutes.toString().padStart(2, "0");
   digitalClockSeconds.textContent = seconds.toString().padStart(2, "0");
 
-  console.log(digitalClockHours, digitalClockMinutes, digitalClockSeconds);
+  // console.log(digitalClockHours, digitalClockMinutes, digitalClockSeconds);
 }
 
 function updateClockDots() {

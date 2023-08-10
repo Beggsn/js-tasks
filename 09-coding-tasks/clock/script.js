@@ -43,6 +43,8 @@ function updateAnalogClock() {
 }
 
 // Update the digital clock values and dots every second
-setInterval(updateDigitalClock, 1000);
-setInterval(updateClockDots, 1000);
-setInterval(updateAnalogClock, 1000);
+setInterval(() => {
+  updateDigitalClock();
+  updateClockDots();
+  updateAnalogClock();
+}, 1000);

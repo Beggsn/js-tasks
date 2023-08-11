@@ -8,72 +8,51 @@ const main = document.querySelector("main");
 document.getElementById("counter").innerText = counter;
 
 // Update background color on page load
-if (counter % 100 === 0) {
-    main.style.backgroundImage = "linear-gradient(gold, gold)";
-} else {
-    const colorPercentage = (counter % 100) / 100;
-    const colorStop = Math.floor(colorPercentage * 100);
-    main.style.backgroundImage = `linear-gradient(to right, gold ${colorStop}%, transparent ${colorStop}%)`;
-}
+updateBackgroundColor();
 
 // click event 
-main.addEventListener("click", function () {
-    counter++;
-    document.getElementById("counter").innerText = counter;
-
-    // Update background color
-    if (counter % 100 === 0) {
-        main.style.backgroundImage = "linear-gradient(gold, gold)";
-    } else {
-        const colorPercentage = (counter % 100) / 100;
-        const colorStop = Math.floor(colorPercentage * 100);
-        main.style.backgroundImage = `linear-gradient(to right, gold ${colorStop}%, transparent ${colorStop}%)`;
-    }
-
-    // Save counter value to localStorage
-    localStorage.setItem('counterValue', counter);
-});
+main.addEventListener("click", incrementCounter);
 
 // space or enter 
 document.addEventListener("keydown", function (event) {
     if (event.code === 'Space' || event.code === 'Enter') {
-        counter++;
-        document.getElementById("counter").innerText = counter;
-
-        // Update background color
-        if (counter % 100 === 0) {
-            main.style.backgroundImage = "linear-gradient(gold, gold)";
-        } else {
-            const colorPercentage = (counter % 100) / 100;
-            const colorStop = Math.floor(colorPercentage * 100);
-            main.style.backgroundImage = `linear-gradient(to right, gold ${colorStop}%, transparent ${colorStop}%)`;
-        }
-
-        // Save counter value to localStorage
-        localStorage.setItem('counterValue', counter);
+        incrementCounter();
     }
 });
 
 // reset button
-btn.addEventListener("click", function () {
-    counter = 0;
-    document.getElementById("counter").innerText = counter;
-    main.style.backgroundImage = "linear-gradient(white, white)";
-
-    // Save counter value to localStorage
-    localStorage.setItem('counterValue', counter);
-});
+btn.addEventListener("click", resetCounter);
 
 // mousewheel event
 document.addEventListener("wheel", function (event) {
     if (event.deltaY < 0) {
-        counter++;
+        incrementCounter();
     } else if (event.deltaY > 0 && counter > 0) {
         counter--;
     }
-    document.getElementById("counter").innerText = counter;
+    updateCounterDisplay();
+    updateBackgroundColor();
+});
 
-    // Update background color
+function incrementCounter() {
+    counter++;
+    updateCounterDisplay();
+    updateBackgroundColor();
+    saveCounterValue();
+}
+
+function resetCounter() {
+    counter = 0;
+    updateCounterDisplay();
+    main.style.backgroundImage = "linear-gradient(white, white)";
+    saveCounterValue();
+}
+
+function updateCounterDisplay() {
+    document.getElementById("counter").innerText = counter;
+}
+
+function updateBackgroundColor() {
     if (counter % 100 === 0) {
         main.style.backgroundImage = "linear-gradient(gold, gold)";
     } else {
@@ -81,8 +60,8 @@ document.addEventListener("wheel", function (event) {
         const colorStop = Math.floor(colorPercentage * 100);
         main.style.backgroundImage = `linear-gradient(to right, gold ${colorStop}%, transparent ${colorStop}%)`;
     }
+}
 
-    // Save counter value to localStorage
+function saveCounterValue() {
     localStorage.setItem('counterValue', counter);
-});
-
+}

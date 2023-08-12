@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do App</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main>
-      <label for=""></label>
-    </main>
 
-    <script src="script.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="header-title">Meine To-Do's</h1>
+  </header>
+
+  <main class="main">
+    <div class="todo-container">
+
+      <div class="filter-container">
+        <label for="checkbox-all" class="filter-label">Alle</label>
+        <input type="checkbox" name="all" id="checkbox-all" class="filter-checkbox" />
+        <label for="checkbox-open" class="filter-label">Offen</label>
+        <input type="checkbox" name="open" id="checkbox-open" class="filter-checkbox" />
+        <label for="checkbox-done" class="filter-label">Erledigt</label>
+        <input type="checkbox" name="done" id="checkbox-done" class="filter-checkbox" />
+      </div>
+
+      <div class="input-container">
+        <label for="todo-input" class="input-label">Was hast du zu erledigen?</label>
+        <input type="text" name="todo-input" id="todo-input" class="input-text" />
+      </div>
+
+      <button id="add-todo" class="add-button">Eintragen</button>
+
+    </div>
+
+    <ul class="list-container">
+      <li class="list-item">Hello World Hello World Hello World Hello World</li>
+      <li class="list-item">Hello World Hello World Hello World Hello World</li>
+      <li class="list-item">Hello World Hello World Hello World Hello World</li>
+      <li class="list-item">Hello World Hello World Hello World Hello World</li>
+      <li class="list-item">Hello World Hello World Hello World Hello World</li>
+      <li class="list-item">Hello World Hello World Hello World Hello World</li>
+      <li class="list-item">Hello World Hello World Hello World Hello World</li>
+    </ul>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
 </html>

@@ -19,44 +19,27 @@
       <div class="filter-container">
         <label for="checkbox-all" class="filter-label">Alle</label>
         <input type="checkbox" name="all" id="checkbox-all" class="filter-checkbox" />
+
         <label for="checkbox-open" class="filter-label">Offen</label>
         <input type="checkbox" name="open" id="checkbox-open" class="filter-checkbox" />
+
         <label for="checkbox-done" class="filter-label">Erledigt</label>
         <input type="checkbox" name="done" id="checkbox-done" class="filter-checkbox" />
       </div>
 
       <div class="input-container">
         <label for="todo-input" class="input-label">Was hast du zu erledigen?</label>
-        <input type="text" name="todo-input" id="todo-input" class="input-text" />
+        <input type="text" name="todo-input" id="todo-input" class="todo-description" />
+        <!-- to-do error message -->
+        <div id="error-message" style="display: none;"></div> 
       </div>
 
-      <button id="add-todo" class="add-button">Eintragen</button>
+      <button id="add-todo" class="btn-add">Eintragen</button>
+      <button id="delete-todo" class="delete-button">Eintrag löschen</button>
 
     </div>
 
-    <ul class="list-container">
-      <li class="list-item">Fügen Sie eine Standardaufgabe zu Ihrem Anwendungsstatus hinzu (damit die Liste, die Sie anzeigen wollen, nicht leer ist)</li>
-      <li class="list-item">Verwenden Sie eine Liste, um alle ToDos Ihres Anwendungsstatus anzuzeigen</li>
-      <li class="list-item">Fügen Sie ein Eingabefeld und eine Schaltfläche hinzu, mit denen Sie neue Aufgaben hinzufügen können.</li>
-      <li class="list-item">Nachfolgende Leerzeichen sollten von der ToDo-Eingabe abgeschnitten werden</li>
-      <li class="list-item">Eine Todo-Entität hat zwei Eigenschaften: die description und eine ID</li>
-      <li class="list-item">Die Beschreibung ist ein Text, der angibt, worum es sich bei der Aufgabe handelt</li>
-      <li class="list-item">Die Eigenschaft ID identifiziert jedes ToDo eindeutig</li>
-      <li class="list-item">Die ID-Eigenschaft sollte von Ihnen selbst erzeugt werden (z. B. mit einer Zählervariablen oder durch Generierung einer ID anhand der aktuellen Zeit)</li>
-      <li class="list-item">Verwenden Sie eine Liste, um alle ToDos Ihres Anwendungsstatus anzuzeigen</li>
-      <li class="list-item">Verwenden Sie den lokalen Speicher, um den aktuellen Zustand der Anwendung zu speichern, wenn er sich ändert</li>
-      <li class="list-item">Jedes Mal, wenn die ToDo-App neu geladen wird, sollte der letzte bekannte Status aus dem lokalen Speicher geladen werden</li>
-      <li class="list-item">Hinzufügen einer done-Eigenschaft zur todo-Entität</li>
-      <li class="list-item">Die Eigenschaft erledigt ist ein boolescher Wert, der angibt, ob ein ToDo erledigt ist oder nicht</li>
-      <li class="list-item">Verwenden Sie ein Kontrollkästchen für die Eigenschaft "erledigt" in der Liste</li>
-      <li class="list-item">Wenn das Kontrollkästchen eines Todos geändert wird, wird der Status des entsprechenden Todos aktualisiert</li>
-      <li class="list-item">Keine doppelten ToDo-Beschreibungen zulassen (z. B. zwei ToDos mit der Beschreibung "JavaScript lernen")</li>
-      <li class="list-item">Hinzufügen eines Filters, der es ermöglicht, entweder "alle Aufgaben", "offene Aufgaben" oder "erledigte Aufgaben" anzuzeigen</li>
-      <li class="list-item">Verwenden Sie Optionsfelder, um die Filter anzuzeigen</li>
-      <li class="list-item">Hinzufügen einer Schaltfläche "Erledigte Aufgaben entfernen", die alle erledigten Aufgaben aus der Liste entfernt</li>
-      <li class="list-item">Alle Punkte abgearbeitet !!!!</li>
-      
-    </ul>
+    <ul class="todos-list"></ul>
   </main>
 
   <script src="script.js"></script>

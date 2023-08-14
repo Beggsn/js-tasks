@@ -36,7 +36,7 @@ Jedes Mal, wenn Sie Ihre App neu laden, sind der Status und die ToDo's weg - sch
 
 ### Erledigt-Status von Todos
 
-You will now implement a feature that will indicate if a todo is still open or already done.
+Sie werden nun eine Funktion implementieren, die anzeigt, ob ein ToDo noch offen oder bereits erledigt ist.
 
 - [ ] Hinzufügen einer done-Eigenschaft zur todo-Entität
 - [ ] Die Eigenschaft erledigt ist ein boolescher Wert, der angibt, ob ein ToDo erledigt ist oder nicht

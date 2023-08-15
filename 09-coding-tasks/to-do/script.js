@@ -1,9 +1,13 @@
 "use strict";
 
+// Elemente aus dem DOM auswählen
 const todoInput = document.querySelector("#todo-input");
 const btnAdd = document.querySelector("#add-todo");
 const todosList = document.querySelector(".todos-list");
+const radioFilter = document.querySelectorAll(".filter-radio");
+const deleteButton = document.querySelector("#delete-todo");
 
+// Zustand initialisieren oder aus dem Local Storage abrufen
 const state = JSON.parse(localStorage.getItem("state")) || {
   todos: [
     { description: "HTML lernen", done: false },
@@ -11,9 +15,10 @@ const state = JSON.parse(localStorage.getItem("state")) || {
   ],
 };
 
+// Event Listener für den "Add" Button hinzufügen
 btnAdd.addEventListener("click", addTodo);
 
-// Diese Funktion fügt ein neues Todo zur Liste hinzu
+// Funktion zum Hinzufügen eines neuen Todos
 function addTodo(event) {
   event.preventDefault();
 
@@ -43,9 +48,17 @@ function addTodo(event) {
 // Die Liste mit allen Todos rendern
 function renderTodos() {
   todosList.innerHTML = "";
-  for (const todo of state.todos) {
-    const newTodoListItem = document.createElement("li"); // <li> Element erstellen
 
+  let filteredTodos = state.todos;
+
+  if (document.querySelector("#radio-open").checked) {
+    filteredTodos = filteredTodos.filter(todo => !todo.done); // Nur offene Todos anzeigen
+  } else if (document.querySelector("#radio-done").checked) {
+    filteredTodos = filteredTodos.filter(todo => todo.done); // Nur erledigte Todos anzeigen
+  };
+
+  for (const todo of filteredTodos) {
+    const newTodoListItem = document.createElement("li"); // <li> Element erstellen
     const doneCheckbox = document.createElement("input"); // <input> Element erstellen
     doneCheckbox.type = "checkbox"; // <input type="checkbox">
 
@@ -56,8 +69,6 @@ function renderTodos() {
     });
 
     doneCheckbox.id = `${todo.description} -> ID:${Date.now()}`; // <input type="checkbox" id="">
-    // console.log der Todo ID
-    console.log(doneCheckbox.id);
 
     doneCheckbox.checked = todo.done; // <input type="checkbox" id="">
 
@@ -71,6 +82,37 @@ function renderTodos() {
 
     todosList.append(newTodoListItem); // <li> an <ul> anhängen (als Child-Element)
   }
+}
+
+
+// Event Listener für die Radiobuttons
+radioFilter.forEach((radio) => {
+  radio.addEventListener("change", radioChange)
+});
+
+// Funktion "Zustand der Radiobuttons"
+function radioChange(event) {
+  const selectedRadio = event.target.id;
+
+  if (selectedRadio === "radio-all") {
+    renderTodos();
+  }
+  else if (selectedRadio === "radio-open") {
+    renderTodos();
+  }
+  else if (selectedRadio === "radio-done") {
+    renderTodos();
+  }
+};
+
+// Event Listener für den "Delete" Button
+deleteButton.addEventListener("click", deleteDoneTodos);
+
+// 
+function deleteDoneTodos() {
+  state.todos = state.todos.filter(todo => !todo.done);
+  persistState(state);
+  renderTodos();
 }
 
 // Aktuellen Zustand im LocalStorage speichern

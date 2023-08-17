@@ -46,6 +46,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnColorValue = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
     randomColorButton.style.setProperty("--button-color", btnColorValue);
 
+    // Berechnung der prozentualen Farbwerte
+    const redPercentage = (redValue / 255) * 100;
+    const greenPercentage = (greenValue / 255) * 100;
+    const bluePercentage = (blueValue / 255) * 100;
+
+ // Check ob Prozentwerte 75% erreicht sind
+    const isWhiteText = redPercentage >= 50 && greenPercentage >= 50 && bluePercentage >= 50;
+    const isBlackText = redPercentage < 50 && greenPercentage < 50 && bluePercentage < 50;
+
+    // Schriftfarben anpassen
+    if (isWhiteText) {
+      main.style.color = "black";
+      randomColorButton.style.color = "black";
+    } else if (isBlackText) {
+      main.style.color = "white";
+      randomColorButton.style.color = "white";
+    }
+
+    // Farbe im Header anzeigen
     hexCode.textContent = hexValue;
     header.style.backgroundColor = `rgba(${redValue}, ${greenValue}, ${blueValue}, 0.25)`;
     main.style.backgroundColor = rgbValue;

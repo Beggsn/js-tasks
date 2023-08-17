@@ -51,3 +51,10 @@ blockquote {
   font-style: italic;
   font-size: 1.5rem;
 }
+
+/* .quote-author--highlight {
+  background-color: lightgrey;
+  display: inline-block;
+  border-radius: 5px;
+  padding-inline: 0.4rem;
+} */

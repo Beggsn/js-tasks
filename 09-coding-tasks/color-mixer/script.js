@@ -10,11 +10,28 @@ document.addEventListener('DOMContentLoaded', function() {
   const header = document.querySelector(".header");
   const hexCode = document.querySelector(".hex");
   const main = document.querySelector("main");
+  const randomColorButton = document.querySelector("button");
 
   // Event-Listener zu den Slidern hinzufügen
   redSlider.addEventListener("input", updateColor);
   greenSlider.addEventListener("input", updateColor);
   blueSlider.addEventListener("input", updateColor);
+
+  // Event-Listener zum Button hinzufügen
+  randomColorButton.addEventListener("click", getRandomColor);
+  
+  // Abrufen einer zufälligen Farbe von der API und Update der Schieberegler
+  function getRandomColor() {
+    fetch("https://dummy-apis.netlify.app/api/color")
+      .then((response) => response.json())
+      .then((color) => {
+        // console.log(color);
+        redSlider.value = color.rgb.r;
+        greenSlider.value = color.rgb.g;
+        blueSlider.value = color.rgb.b;
+        updateColor();
+      })
+  }
 
   // Funktion zum Aktualisieren der Farbe
   function updateColor() {

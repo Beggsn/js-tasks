@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const hexValue = `#${decimalToHex(redValue)}${decimalToHex(greenValue)}${decimalToHex(blueValue)}`;
     const rgbValue = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
 
+    // Farbwert als Hintergrundfarbe des Buttons setzen
+    const btnColorValue = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+    randomColorButton.style.setProperty("--button-color", btnColorValue);
+
     hexCode.textContent = hexValue;
     header.style.backgroundColor = `rgba(${redValue}, ${greenValue}, ${blueValue}, 0.25)`;
     main.style.backgroundColor = rgbValue;

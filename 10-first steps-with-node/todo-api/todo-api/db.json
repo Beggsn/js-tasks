@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "description": "Learn HTML",
+      "done": true
+    },
+    {
+      "id": 2,
+      "description": "Learn CSS",
+      "done": true
+    },
+    {
+      "description": "CSS lernen",
+      "done": true,
+      "id": 3
+    },
+    {
+      "description": "Learn Vue.js",
+      "done": false,
+      "id": 4
+    }
+  ]
+}

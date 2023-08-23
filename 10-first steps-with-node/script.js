@@ -13,9 +13,10 @@ const state = {
   todos: [],
 };
 
-// Funktion, um Todos von der API abzurufen und zu aktualisieren
+// ==== fetch requests ====
+//  === Funktion, um Todos von der API abzurufen und zu aktualisieren ===
 function refresh() {
-  fetch("http://localhost:4730/todos?_sort=description")
+  fetch(`http://localhost:4730/todos?_sort=description`)
     .then((response) => response.json())
     .then((todosFromApi) => {
       state.todos = todosFromApi;
@@ -23,9 +24,9 @@ function refresh() {
     });
 }
 
-// Funktion, um ein Todo zu aktualisieren
+//  === Funktion, um ein Todo zu aktualisieren ===
 function updateTodo(id, done) {
-  fetch("http://localhost:4730/todos/" + id, {
+  fetch(`http://localhost:4730/todos/${id}`, {
     method: "PATCH",
     body: JSON.stringify({ done: done }),
     headers: {
@@ -36,17 +37,42 @@ function updateTodo(id, done) {
   });
 }
 
-// Funktion, um erledigte Todos zu löschen
+// === Funktion, um erledigte Todos zu löschen ===
 function removeDone() {
   const doneTodos = state.todos.filter((todo) => todo.done === true);
 
   for (const todo of doneTodos) {
-    fetch("http://localhost:4730/todos/" + todo.id, {
+    fetch(`http://localhost:4730/todos/${todo.id}`, {
       method: "DELETE",
     }).then(() => {
       refresh();
     });
   }
+}
+
+// === Funktion Todos hinzufügen ===
+function addTodo() {
+  // Erstelle ein neues Todo
+  const newTodoText = newTodoInput.value;
+  const newTodo = {
+    description: newTodoText,
+    done: false,
+  };
+
+  fetch(`http://localhost:4730/todos`, {
+    method: "POST",
+    body: JSON.stringify(newTodo),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then(() => {
+      // Aktualisiere die Liste
+      refresh();
+      newTodoInput.value = "";
+      newTodoInput.focus();
+    });
 }
 
 // Event-Listener für den Button zum Löschen von erledigten Todos
@@ -62,7 +88,15 @@ radioButtons.forEach((radioButton) => {
   });
 });
 
-// Funktion, um die Todos zu rendern
+// Event-Listener "Einträge im Input"
+addTodoBtn.addEventListener("click", addTodo);
+newTodoInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    addTodo();
+  }
+});
+
+// === Funktion, um Todos zu rendern ===
 function renderTodos() {
   todoList.innerHTML = "";
 
@@ -96,38 +130,6 @@ function renderTodos() {
     newLi.append(checkbox, label);
     todoList.append(newLi);
   });
-}
-// Event-Listener für den Button zum Hinzufügen eines Todos
-addTodoBtn.addEventListener("click", addTodo);
-newTodoInput.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    addTodo();
-  }
-});
-
-// Funktion zum Hinzufügen eines Todos
-function addTodo() {
-  // Erstelle ein neues Todo
-  const newTodoText = newTodoInput.value;
-  const newTodo = {
-    description: newTodoText,
-    done: false,
-  };
-
-  fetch("http://localhost:4730/todos", {
-    method: "POST",
-    body: JSON.stringify(newTodo),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then(() => {
-      // Aktualisiere die Liste
-      refresh();
-      newTodoInput.value = "";
-      newTodoInput.focus();
-    });
 }
 
 // Startup

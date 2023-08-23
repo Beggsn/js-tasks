@@ -1,24 +1,29 @@
 "use strict";
 
+// Referenzen auf HTML-Elemente holen
 const addTodoBtn = document.querySelector("#add-todo-btn");
 const newTodoInput = document.querySelector("#new-todo");
 const todoList = document.querySelector("#list");
 const radioButtons = document.querySelectorAll('input[type="radio"]');
 const deleteTodoBtn = document.querySelector("#delete-todo-btn");
 
+// Zustandsobjekt
+const state = {
+  currentFilter: "filter-all",
+  todos: [],
+};
 
-let todos = [];
-
+// Funktion, um Todos von der API abzurufen und zu aktualisieren
 function refresh() {
   fetch("http://localhost:4730/todos?_sort=description")
     .then((response) => response.json())
     .then((todosFromApi) => {
-      todos = todosFromApi;
+      state.todos = todosFromApi;
       renderTodos();
     });
 }
 
-// function patch a todo
+// Funktion, um ein Todo zu aktualisieren
 function updateTodo(id, done) {
   fetch("http://localhost:4730/todos/" + id, {
     method: "PATCH",
@@ -31,32 +36,48 @@ function updateTodo(id, done) {
   });
 }
 
-
-// function delete a todo
-
+// Funktion, um erledigte Todos zu löschen
 function removeDone() {
-  const doneTodos = todos.filter((todo) => todo.done === true);
+  const doneTodos = state.todos.filter((todo) => todo.done === true);
 
-  for(const todo of doneTodos){
-    // console.log(todo);
+  for (const todo of doneTodos) {
     fetch("http://localhost:4730/todos/" + todo.id, {
-    method: "DELETE",
-  }).then(() => {
-    refresh();
-  });
+      method: "DELETE",
+    }).then(() => {
+      refresh();
+    });
   }
 }
 
+// Event-Listener für den Button zum Löschen von erledigten Todos
 deleteTodoBtn.addEventListener("click", () => {
   removeDone();
 });
 
+// Event-Listener für die Radio-Buttons
+radioButtons.forEach((radioButton) => {
+  radioButton.addEventListener("click", () => {
+    state.currentFilter = radioButton.id; // Aktualisiere den aktuellen Filter im Zustandsobjekt
+    renderTodos();
+  });
+});
 
-// function render selected todos noch implemntieren
-
+// Funktion, um die Todos zu rendern
 function renderTodos() {
   todoList.innerHTML = "";
-  todos.forEach((todo) => {
+
+  const filteredTodos = state.todos.filter((todo) => {
+    // Filtere die Todos basierend auf dem aktuellen Filter
+    if (state.currentFilter === "filter-all") {
+      return true; // Zeige alle Todos
+    } else if (state.currentFilter === "filter-open") {
+      return !todo.done; // Zeige nur offene Todos
+    } else if (state.currentFilter === "filter-done") {
+      return todo.done; // Zeige nur erledigte Todos
+    }
+  });
+  // Iteriere über die gefilterten Todos und erstelle HTML-Elemente
+  filteredTodos.forEach((todo) => {
     const newLi = document.createElement("li");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -64,9 +85,8 @@ function renderTodos() {
     checkbox.id = `todo-${todo.id}`;
 
     checkbox.addEventListener("change", () => {
-      todo.done = checkbox.checked;
-      // console.log(todo);
-      updateTodo(todo.id, todo.done);
+      todo.done = checkbox.checked; // Aktualisiere den Status des Todos
+      updateTodo(todo.id, todo.done); // Aktualisiere das Todo in der API
     });
 
     const label = document.createElement("label");
@@ -77,7 +97,7 @@ function renderTodos() {
     todoList.append(newLi);
   });
 }
-
+// Event-Listener für den Button zum Hinzufügen eines Todos
 addTodoBtn.addEventListener("click", addTodo);
 newTodoInput.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
@@ -85,7 +105,9 @@ newTodoInput.addEventListener("keydown", function (event) {
   }
 });
 
+// Funktion zum Hinzufügen eines Todos
 function addTodo() {
+  // Erstelle ein neues Todo
   const newTodoText = newTodoInput.value;
   const newTodo = {
     description: newTodoText,
@@ -101,11 +123,13 @@ function addTodo() {
   })
     .then((response) => response.json())
     .then(() => {
+      // Aktualisiere die Liste
       refresh();
       newTodoInput.value = "";
       newTodoInput.focus();
     });
 }
 
+// Startup
 refresh();
 newTodoInput.focus();

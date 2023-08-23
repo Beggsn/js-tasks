@@ -4,6 +4,7 @@ const addTodoBtn = document.querySelector("#add-todo-btn");
 const newTodoInput = document.querySelector("#new-todo");
 const todoList = document.querySelector("#list");
 const radioButtons = document.querySelectorAll('input[type="radio"]');
+const deleteTodoBtn = document.querySelector("#delete-todo-btn");
 
 
 let todos = [];
@@ -33,7 +34,25 @@ function updateTodo(id, done) {
 
 // function delete a todo
 
-// function render selected todos
+function removeDone() {
+  const doneTodos = todos.filter((todo) => todo.done === true);
+
+  for(const todo of doneTodos){
+    // console.log(todo);
+    fetch("http://localhost:4730/todos/" + todo.id, {
+    method: "DELETE",
+  }).then(() => {
+    refresh();
+  });
+  }
+}
+
+deleteTodoBtn.addEventListener("click", () => {
+  removeDone();
+});
+
+
+// function render selected todos noch implemntieren
 
 function renderTodos() {
   todoList.innerHTML = "";
@@ -81,10 +100,8 @@ function addTodo() {
     },
   })
     .then((response) => response.json())
-    .then((newTodoFromApi) => {
-      // todos.push(newTodoFromApi);
+    .then(() => {
       refresh();
-      // renderTodos();
       newTodoInput.value = "";
       newTodoInput.focus();
     });

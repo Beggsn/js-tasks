@@ -3,10 +3,12 @@
 const addTodoBtn = document.querySelector("#add-todo-btn");
 const newTodoInput = document.querySelector("#new-todo");
 const todoList = document.querySelector("#list");
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+
 
 let todos = [];
 
-function loadTodos() {
+function refresh() {
   fetch("http://localhost:4730/todos?_sort=description")
     .then((response) => response.json())
     .then((todosFromApi) => {
@@ -15,13 +17,23 @@ function loadTodos() {
     });
 }
 
+// function patch a todo
+function updateTodo(id, done) {
+  fetch("http://localhost:4730/todos/" + id, {
+    method: "PATCH",
+    body: JSON.stringify({ done: done }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(() => {
+    refresh();
+  });
+}
 
 
-//
-// function patch a todo from "http://localhost:4730/todos/:id"
+// function delete a todo
 
-// function delete a todo from "http://localhost:4730/todos/:id"
-
+// function render selected todos
 
 function renderTodos() {
   todoList.innerHTML = "";
@@ -34,7 +46,8 @@ function renderTodos() {
 
     checkbox.addEventListener("change", () => {
       todo.done = checkbox.checked;
-      console.log(todo);
+      // console.log(todo);
+      updateTodo(todo.id, todo.done);
     });
 
     const label = document.createElement("label");
@@ -45,9 +58,6 @@ function renderTodos() {
     todoList.append(newLi);
   });
 }
-
-
-
 
 addTodoBtn.addEventListener("click", addTodo);
 newTodoInput.addEventListener("keydown", function (event) {
@@ -73,12 +83,12 @@ function addTodo() {
     .then((response) => response.json())
     .then((newTodoFromApi) => {
       // todos.push(newTodoFromApi);
-      loadTodos();
+      refresh();
       // renderTodos();
       newTodoInput.value = "";
       newTodoInput.focus();
     });
 }
 
-loadTodos();
+refresh();
 newTodoInput.focus();

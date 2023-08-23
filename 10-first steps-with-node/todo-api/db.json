@@ -3,12 +3,12 @@
     {
       "id": 1,
       "description": "Learn HTML",
-      "done": true
+      "done": false
     },
     {
       "id": 2,
       "description": "Learn CSS",
-      "done": true
+      "done": false
     },
     {
       "description": "Learn JS",
@@ -29,6 +29,11 @@
       "description": "Learn Git",
       "done": false,
       "id": 7
+    },
+    {
+      "description": "Test String",
+      "done": false,
+      "id": 8
     }
   ]
 }

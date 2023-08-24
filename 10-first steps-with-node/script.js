@@ -41,14 +41,21 @@ function updateTodo(id, done) {
 function removeDone() {
   const doneTodos = state.todos.filter((todo) => todo.done === true);
 
-  for (const todo of doneTodos) {
-    fetch(`http://localhost:4730/todos/${todo.id}`, {
+  const deletePromises = doneTodos.map((todo) => {
+    return fetch(`http://localhost:4730/todos/${todo.id}`, {
       method: "DELETE",
-    }).then(() => {
-      refresh();
     });
-  }
+  });
+
+  Promise.all(deletePromises)
+    .then(() => {
+      refresh();
+    })
+    .catch((error) => {
+      console.error("Fehler beim Löschen der Todos: ", error);
+    });
 }
+
 
 // === Funktion Todos hinzufügen ===
 function addTodo() {

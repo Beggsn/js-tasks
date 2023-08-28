@@ -1,6 +1,7 @@
 /testbed/index.html
 /testbed/script.js
-01-hello-world/
+/01-hello-world/index.html
+/01-hello-world/script.js
 02-operators-and-data-types/
 03-function-basics/
 04-variables/
@@ -8,3 +9,10 @@
 06-loops/
 07-arrays/
 /09-coding-tasks/README.md
+helloWorld/
+operators-and-data-types/
+function-basics/
+variables/
+if-and-switch-statements/
+loops/
+arrays/

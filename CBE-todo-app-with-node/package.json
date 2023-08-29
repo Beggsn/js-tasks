@@ -2,11 +2,12 @@
   "name": "todo-api",
   "description": "A simple backend for todo apps",
   "version": "1.0.0",
-  "dependencies": {
-    "json-server": "^0.15.1"
-  },
   "bin": "server.js",
   "scripts": {
     "start": "node server"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.3",
+    "todo-api": "^1.0.1"
   }
 }

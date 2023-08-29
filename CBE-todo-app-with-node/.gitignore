@@ -1,3 +1,5 @@
+node_modules/
+package-lock.json
 template.txt
-todo-api/db.json
-todo-api/db-original.json
+db.json
+db-original.json

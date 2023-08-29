@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <label for="add-todo-btn"></label>
+    <input type="text" id="new-todo" />
+    <button type="button" id="add-todo-btn">Add Todo</button>
+
+    <button type="button" id="delete-todo-btn">Delete Todos</button>
+
+    <label for="filter-all">Alle</label>
+    <input type="radio" name="filter" id="filter-all" checked />
+
+    <label for="filter-open">Offen</label>
+    <input type="radio" name="filter" id="filter-open" />
+
+    <label for="filter-done">Erledigt</label>
+    <input type="radio" name="filter" id="filter-done" />
+
+    <ul id="list"></ul>
+
+    <script src="script.js"></script>
+  </body>
+</html>

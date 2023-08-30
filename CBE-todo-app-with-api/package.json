@@ -1,13 +1,18 @@
 {
-  "name": "todo-api",
-  "description": "A simple backend for todo apps",
+  "name": "cbe-todo-app-with-api",
   "version": "1.0.0",
-  "bin": "server.js",
+  "description": "A simple todo app using fetch.",
+  "main": "script.js",
   "scripts": {
-    "start": "node server"
+    "api": "todo-api",
+    "start": "serve"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "json-server": "^0.17.3",
-    "todo-api": "^1.0.1"
+    "serve": "^14.2.1",
+    "todo-api": "github:coding-bootcamps-eu/todo-api"
   }
 }

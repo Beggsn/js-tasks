@@ -6,7 +6,8 @@ The todo-api is a demo api to list, get, create, update and delete todos.
 
 - Clone repository and `cd` into the cloned folder
 - Run `npm install` to install the dependencies
-- Start the todo api server with `npm start`
+- Start the todo api server with `npm run api`
+- Start the local server with `npm start` on `http://localhost:3000` 
 - Open the documentation on `http://localhost:4730/`
 
 ## Supported actions
